@@ -27,7 +27,6 @@ export const StyledHeader = styled.div`
     }
   }
 `;
-export const ListMenu = styled.div``;
 export const Link = styled.a`
   font-family: Poppins, Helvetica, Arial, sans-serif;
   font-size: 13px;
@@ -141,9 +140,6 @@ export const StyledDrawer = styled(Drawer)`
   .ant-drawer-header-title {
     display: block;
     text-align: end;
-  }
-  .ant-drawer-body {
-    // overflow: hidden !important;
   }
   .ant-drawer-close {
     padding: 13px;

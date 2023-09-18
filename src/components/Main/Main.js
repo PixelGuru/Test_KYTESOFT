@@ -281,7 +281,6 @@ const Main = () => {
                 Meh synth Schlitz, tempor duis single-origin coffee ea next
                 level ethnic fingerstache...
               </StyledCardTextSection3>
-
               <StyleLinkCard href="#">
                 Read More <RightOutlined />
               </StyleLinkCard>

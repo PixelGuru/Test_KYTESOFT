@@ -9,7 +9,6 @@ import {
   StyledMenu,
   ButtonCart,
   StyledBadge,
-  ListMenu,
 } from "./styled";
 import Logo from "../../assets/logo.png";
 import LogoBlack from "../../assets/logo-black.png";
@@ -20,6 +19,24 @@ import { MenuOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 const Header = ({ open, showDrawer, onClose }) => {
   const [showHeader, setShowHeader] = useState(true);
   const [prevScrollY, setPrevScrollY] = useState(0);
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > prevScrollY || currentScrollY < 100) {
+        setShowHeader(false);
+      } else {
+        setShowHeader(true);
+      }
+      setPrevScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [prevScrollY]);
 
   const menuItems = [
     {
@@ -319,34 +336,12 @@ const Header = ({ open, showDrawer, onClose }) => {
     },
   ];
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > prevScrollY || currentScrollY < 100) {
-        console.log("Cuộn xuống");
-        setShowHeader(false); // Cuộn xuống, ẩn header
-      } else {
-        console.log("Cuộn lên");
-        setShowHeader(true); // Cuộn lên, hiện header
-      }
-
-      setPrevScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [prevScrollY]);
-
   return (
     <StyledHeader className={showHeader ? "show" : ""}>
       <a href="#">
         <img src={showHeader ? LogoBlack : Logo} alt="" width={94} />
       </a>
-      <ListMenu>
+      <div>
         {menuItems.map((menuItem, index) => (
           <HeaderMenuItem
             showHeader={showHeader}
@@ -365,7 +360,7 @@ const Header = ({ open, showDrawer, onClose }) => {
             />
           </StyledBadge>
         </a>
-      </ListMenu>
+      </div>
     </StyledHeader>
   );
 };
